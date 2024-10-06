@@ -2,8 +2,8 @@ import React from "react";
 // import Navbar from "./components/Navbar";
 import { Navbar } from "./components";
 import "./App.css";
-// import { Switch, Router, Link } from "react-router-dom";
-// import { Layout, Typography, Space } from "antd";
+import { Switch, Router, Link, Route } from "react-router-dom";
+import { Layout, Typography, Space } from "antd";
 
 const App = () => {
   return (
@@ -12,7 +12,27 @@ const App = () => {
         <Navbar />
       </div>
       <div className="main">
-        <h1>main</h1>
+        <Layout>
+          <div className="router">
+            <Switch>
+              <Route exact path="/">
+                <Homepage />
+              </Route>
+              <Route exact path="/exchanges">
+                <Exchanges />
+              </Route>
+              <Route exact path="/Cryptocurrencies">
+                <Cryptocurrencies />
+              </Route>
+              <Route exact path="/Crypto/:coinId">
+                <CryptoDetails />
+              </Route>
+              <Route exact path="/news">
+                <News />
+              </Route>
+            </Switch>
+          </div>
+        </Layout>
       </div>
       <div className="footer"></div>
     </div>
