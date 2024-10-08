@@ -1,8 +1,15 @@
 import React from "react";
 // import Navbar from "./components/Navbar";
-import { Navbar } from "./components";
+import {
+  Cryptocurrencies,
+  CryptoDetails,
+  Exchanges,
+  HomePage,
+  Navbar,
+  News,
+} from "./components";
 import "./App.css";
-import { Switch, Router, Link, Route } from "react-router-dom";
+import { Router, Link, Route, Routes } from "react-router-dom";
 import { Layout, Typography, Space } from "antd";
 
 const App = () => {
@@ -12,11 +19,10 @@ const App = () => {
         <Navbar />
       </div>
       <div className="main">
-        <Layout>
+        {/* <Layout>
           <div className="router">
-            <Switch>
+            <Routes>
               <Route exact path="/">
-                <Homepage />
               </Route>
               <Route exact path="/exchanges">
                 <Exchanges />
@@ -25,12 +31,23 @@ const App = () => {
                 <Cryptocurrencies />
               </Route>
               <Route exact path="/Crypto/:coinId">
-                <CryptoDetails />
+                <CryptoDetails></CryptoDetails>
               </Route>
               <Route exact path="/news">
                 <News />
               </Route>
-            </Switch>
+            </Routes>
+          </div>
+        </Layout> */}
+        <Layout>
+          <div className="router">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+              <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+              <Route path="/news" element={<News />} />
+            </Routes>
           </div>
         </Layout>
       </div>
