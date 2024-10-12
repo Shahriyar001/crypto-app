@@ -20,6 +20,25 @@ const News = ({ simplified }) => {
   if (!cryptoNews?.value) return "Data not found";
   return (
     <Row gutter={[24, 24]}>
+      {!simplified && (
+        <Col span={24}>
+          <Select
+            showSearch
+            className="select-news"
+            placeholder="Select a Crypto"
+            optionFilterProp="children"
+            // onChange={(value) => setNewsCategory(value)}
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Option value="Cryptocurency">Cryptocurrency</Option>
+            {data?.data?.coins?.map((currency) => (
+              <Option value={currency.name}>{currency.name}</Option>
+            ))}
+          </Select>
+        </Col>
+      )}
       {cryptoNews?.value?.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
@@ -29,6 +48,7 @@ const News = ({ simplified }) => {
                   {news.name}
                 </Title>
                 <img
+                  style={{ maxWidth: "200px", maxHeight: "100px" }}
                   src={news?.image?.thumnail?.contentURL || demoImage}
                   alt="/"
                 />
@@ -47,10 +67,13 @@ const News = ({ simplified }) => {
                     }
                     alt="news"
                   />
-                  <Text>
-                    {moment(news.datePublished).startOf("ss").fromNow()}
+                  <Text className="provider-name">
+                    {news.provider[0]?.name}
                   </Text>
                 </div>
+                <Text>
+                  {moment(news.datePublished).startOf("ss").fromNow()}
+                </Text>
               </div>
             </a>
           </Card>
