@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, Card, Col, Row, Select, Typography } from "antd";
 import moment from "moment";
 
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
+import { useGetCryptosQuery } from "../services/cryptoAPi";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
 
 const News = ({ simplified }) => {
+  const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
   const { data: cryptoNews } = useGetCryptoNewsQuery({
-    newsCategory: "Cryptocurrency",
+    newsCategory,
     count: simplified ? 6 : 12,
   });
+  const { data } = useGetCryptosQuery(100);
 
   const demoImage =
     "https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
@@ -27,7 +30,7 @@ const News = ({ simplified }) => {
             className="select-news"
             placeholder="Select a Crypto"
             optionFilterProp="children"
-            // onChange={(value) => setNewsCategory(value)}
+            onChange={(value) => setNewsCategory(value)}
             filterOption={(input, option) =>
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
