@@ -4,7 +4,11 @@ import HTMLReactParser from "html-react-parser/lib/index";
 import { useParams } from "react-router-dom";
 import millify from "millify";
 import { Col, Row, Select, Typography } from "antd";
-import { useGetCryptoDetailsQuery } from "../services/cryptoAPi";
+import {
+  useGetCryptoDetailsQuery,
+  useGetCryptoHistoryQuery,
+} from "../services/cryptoAPi";
+import LineChart from "./LineChart";
 import {
   CheckOutlined,
   DollarCircleOutlined,
@@ -24,6 +28,10 @@ const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(1);
+  const { data: coinHistroy, isFetching } = useGetCryptoHistoryQuery({
+    coinId,
+    timePeriod,
+  });
   const cryptoDetails = data?.data?.coin;
   console.log(data);
 
@@ -116,6 +124,11 @@ const CryptoDetails = () => {
           <Option key={date}>{date}</Option>
         ))}
       </Select>
+      <LineChart
+        coinHistroy={coinHistroy}
+        currentPrice={millify(cryptoDetails?.price)}
+        coinName={cryptoDetails?.name}
+      />
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
