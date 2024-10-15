@@ -5,6 +5,41 @@ import { Col, Row, Typography } from "antd";
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
+  // const coinPrice = [];
+  // const coinTimestamp = [];
+
+  // for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+  //   coinPrice.push(coinHistory?.data?.history[i].price);
+  //   coinTimestamp.push(
+  //     new Date(coinHistory?.data?.history[i].timeStamp).toLocaleDateString()
+  //   );
+  // }
+
+  // const data = {
+  //   labels: coinTimestamp,
+  //   datasts: [
+  //     {
+  //       label: "Price in USD",
+  //       data: coinPrice,
+  //       fill: false,
+  //       backgroundColor: "#00071bd",
+  //       borderColor: "#0071bd",
+  //     },
+  //   ],
+  // };
+
+  // const options = {
+  //   scales: {
+  //     yAxios: [
+  //       {
+  //         ticks: {
+  //           beginAtZero: true,
+  //         },
+  //       },
+  //     ],
+  //   },
+  // };
+
   return (
     <>
       <Row className="chart-header">
@@ -20,6 +55,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
           </Title>
         </Col>
       </Row>
+      {/* <Line data={data} options={options}></Line> */}
     </>
   );
 };

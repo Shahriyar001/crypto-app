@@ -28,12 +28,14 @@ const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(1);
-  const { data: coinHistroy, isFetching } = useGetCryptoHistoryQuery({
+  const { data: coinHistroy } = useGetCryptoHistoryQuery({
     coinId,
     timePeriod,
   });
   const cryptoDetails = data?.data?.coin;
   console.log(data);
+
+  if (isFetching) return "Loading....";
 
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
@@ -120,7 +122,7 @@ const CryptoDetails = () => {
         placeholder="Select Time Period"
         onChange={(value) => setTimePeriod(value)}
       >
-        {time.map((date) => (
+        {time?.map((date) => (
           <Option key={date}>{date}</Option>
         ))}
       </Select>
@@ -137,7 +139,7 @@ const CryptoDetails = () => {
             </Title>
             <p>An Overview showing the stats of {cryptoDetails?.name}</p>
           </Col>
-          {stats.map(({ icon, title, value }) => (
+          {stats?.map(({ icon, title, value }) => (
             <Col className="coin-stats">
               <Col className="coin-stats-name">
                 <Text>{icon}</Text>
@@ -157,7 +159,7 @@ const CryptoDetails = () => {
               as the base and quote currency, the rank, and trading volume.
             </p>
           </Col>
-          {genericStats.map(({ icon, title, value }) => (
+          {genericStats?.map(({ icon, title, value }) => (
             <Col className="coin-stats">
               <Col className="coin-stats-name">
                 <Text>{icon}</Text>
